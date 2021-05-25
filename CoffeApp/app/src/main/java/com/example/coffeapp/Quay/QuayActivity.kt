@@ -189,7 +189,8 @@ class QuayActivity : AppCompatActivity() {
                             post[i] = postlist[i].idDatnuoc.toString()
                             array_nuoc_canlam.add(OBJ_Datnuoc(postlist[i].idDatnuoc, postlist[i].idSoban,
                                     postlist[i].idNuoc, postlist[i].soluong, postlist[i].ngay,
-                                    postlist[i].thanhtoan, postlist[i].Xong_Don, postlist[i].tenNuoc))
+                                    postlist[i].thanhtoan, postlist[i].Xong_Don, postlist[i].tenNuoc,
+                                    postlist[i].GiaNiemYet))
 
 
                             headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
@@ -232,7 +233,8 @@ class QuayActivity : AppCompatActivity() {
                             post[i] = postlist[i].idDatnuoc.toString()
                             array_nuoc_dalam.add(OBJ_Datnuoc(postlist[i].idDatnuoc, postlist[i].idSoban,
                                     postlist[i].idNuoc, postlist[i].soluong, postlist[i].ngay,
-                                    postlist[i].thanhtoan, postlist[i].Xong_Don, postlist[i].tenNuoc))
+                                    postlist[i].thanhtoan, postlist[i].Xong_Don, postlist[i].tenNuoc,
+                            postlist[i].GiaNiemYet))
 
 
                             headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel

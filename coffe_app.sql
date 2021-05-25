@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 15, 2021 lúc 05:21 PM
+-- Thời gian đã tạo: Th5 25, 2021 lúc 10:15 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.3.27
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `coffe_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chat`
+--
+
+CREATE TABLE `chat` (
+  `idchat` int(11) NOT NULL,
+  `idQuyen` int(11) NOT NULL,
+  `NoiDung` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `chat`
+--
+
+INSERT INTO `chat` (`idchat`, `idQuyen`, `NoiDung`) VALUES
+(20, 2, 'helo'),
+(22, 2, 'hello2'),
+(23, 2, 'hi'),
+(24, 2, 'hello chat');
 
 -- --------------------------------------------------------
 
@@ -42,14 +64,7 @@ CREATE TABLE `datnuoc` (
 --
 
 INSERT INTO `datnuoc` (`idDatnuoc`, `idSoban`, `idNuoc`, `soluong`, `ngay`, `thanhtoan`, `Xong_Don`) VALUES
-(1, 5, 1, 2, '2021-05-11', 1, 2),
-(2, 5, 4, 2, '2021-05-11', 1, 2),
-(6, 1, 1, 2, '2021-05-11', 1, 0),
-(9, 1, 1, 3, '2021-05-14', 1, 2),
-(10, 5, 4, 1, '2021-05-14', 1, 0),
-(11, 4, 2, 3, '2021-05-14', 0, 0),
-(12, 2, 1, 2, '2021-05-15', 0, 0),
-(14, 1, 2, 2, '2021-05-15', 0, 0);
+(10, 3, 2, 2, '2021-05-25', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -165,8 +180,8 @@ CREATE TABLE `nuoc` (
 INSERT INTO `nuoc` (`idNuoc`, `idLoaiNuoc`, `tenNuoc`, `hinhanh`, `mota`, `idGiaThanh`) VALUES
 (1, 1, 'COCA', 'anh1\r\n', 'Nước uống giải khát cocacola', 1),
 (2, 3, 'Chanh vắt', 'anh2', 'Nước chanh vắt thơm mát', 3),
-(3, 2, 'Nước', 'anh3', 'Nước ép có mùi cam', 3),
-(4, 2, 'Nước', 'th.jpg', 'Nước ép ổi có mùi ổi', 2),
+(3, 2, 'Nước ổi', 'anh3', 'Nước ép có mùi cam', 3),
+(4, 2, 'Nước dưa', 'th.jpg', 'Nước ép ổi có mùi ổi', 2),
 (5, 2, 'Nước xoài ép', 'th.jpg', 'Nước ép ổi có mùi xoài', 2);
 
 -- --------------------------------------------------------
@@ -245,6 +260,13 @@ INSERT INTO `user` (`idUser`, `idQuyen`, `ho`, `ten`, `email`, `diachi`, `gioiti
 --
 
 --
+-- Chỉ mục cho bảng `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`idchat`),
+  ADD KEY `idUser` (`idQuyen`);
+
+--
 -- Chỉ mục cho bảng `datnuoc`
 --
 ALTER TABLE `datnuoc`
@@ -315,10 +337,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `idchat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT cho bảng `datnuoc`
 --
 ALTER TABLE `datnuoc`
-  MODIFY `idDatnuoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idDatnuoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `giathanh`

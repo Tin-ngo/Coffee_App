@@ -19,11 +19,13 @@ import com.example.coffeapp.*
 import com.example.coffeapp.Chat.Adapter_ListChat
 import com.example.coffeapp.Chat.OBJ_Chat
 import com.example.coffeapp.PV.Order.CustomDialogFragment_PV
+import com.example.coffeapp.PV.Order.DialogFragmment_detailNuoc
 import com.example.coffeapp.PV.Order_Xong.Adapter_XemOrder
 import com.example.coffeapp.ThuNgan.Tong_Thu.Adapter_XemThunhap
 import com.example.coffeapp.ThuNgan.Tong_Thu.DialogFragment_Thungan
 import com.example.coffeapp.ThuNgan.Tong_Thu.OBJ_XemThunhap
 import com.example.coffeapp.ThuNgan.Xem_Order.Adapter_DialogFragment_TN
+import com.example.coffeapp.ThuNgan.Xem_Order.DialogFragmment_detail_datban
 import kotlinx.android.synthetic.main.phucvu_activity.*
 import kotlinx.android.synthetic.main.thungan_ativity.*
 import kotlinx.android.synthetic.main.thungan_ativity.btn_send
@@ -204,7 +206,7 @@ class ThunganActivity : AppCompatActivity() {
                             post[i] = postlist[i].idDatnuoc.toString()
                             array.add(OBJ_Datnuoc(postlist[i].idDatnuoc, postlist[i].idSoban, postlist[i].idNuoc,
                                     postlist[i].soluong, postlist[i].ngay, postlist[i].thanhtoan, postlist[i].Xong_Don,
-                                    postlist[i].tenNuoc))
+                                    postlist[i].tenNuoc, postlist[i].GiaNiemYet))
 
                             headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
                             edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
@@ -215,9 +217,12 @@ class ThunganActivity : AppCompatActivity() {
                             myListView_thungan_activity.onItemClickListener = AdapterView.OnItemClickListener {
                                 adapterView, view, position,
                                 id ->
-                                var dialog = Adapter_DialogFragment_TN(position, array)   //hiển thị dialog khi click
+//                                var dialog = Adapter_DialogFragment_TN(position, array)   //hiển thị dialog khi click
+//                                dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+//                                Log.d("TITLE", "Xem getDatNuoc")
+
+                                var dialog = DialogFragmment_detail_datban(position, array)   //hiển thị dialog khi click
                                 dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-                                Log.d("TITLE", "Xem getDatNuoc")
                             }
                         }
                     }

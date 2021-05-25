@@ -226,12 +226,20 @@
         {
             
 //             $query = "SELECT * FROM datnuoc ORDER BY idDatnuoc";
-            $query = "SELECT * FROM datnuoc 
-                    INNER JOIN soban 
-                    INNER JOIN nuoc 
-                    ON datnuoc.idSoban = soban.idSoban
-                        && datnuoc.idNuoc = nuoc.idNuoc
-                     ORDER BY Xong_Don
+            // $query = "SELECT * FROM datnuoc 
+            //         INNER JOIN soban 
+            //         INNER JOIN nuoc 
+            //         ON datnuoc.idSoban = soban.idSoban
+            //             && datnuoc.idNuoc = nuoc.idNuoc
+            //          ORDER BY Xong_Don
+            //         ";
+
+             $query = "SELECT * FROM datnuoc 
+             INNER JOIN soban 
+             INNER JOIN nuoc 
+             ON datnuoc.idSoban = soban.idSoban && datnuoc.idNuoc = nuoc.idNuoc 
+             INNER JOIN giathanh 
+             ON nuoc.idGiaThanh = giathanh.idGiaThanh ORDER BY Xong_Don
                     ";
 
             $result = $this->api->query($query);
@@ -244,6 +252,9 @@
 
             return $data;
         }
+
+
+
 
 
                    

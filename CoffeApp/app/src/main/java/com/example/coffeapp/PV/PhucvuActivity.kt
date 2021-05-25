@@ -266,8 +266,11 @@ class PhucvuActivity : AppCompatActivity() {
                             myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
                                 adapterView, view, position, id ->
 
+                                // HIỂN THỊ LIST VIEW
                                 var dialog = CustomDialogFragment_PV(position)   //hiển thị dialog khi click
                                 dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+
+                                //SỬ HIỂN THỊ CHI TIẾT MỘT DIALOGFRAGMENT
 
                             }
                         }
@@ -298,7 +301,8 @@ class PhucvuActivity : AppCompatActivity() {
                             // thêm dữ liệu vào mảng postlist
                             post[i] = postlist[i].idDatnuoc.toString()
                             array.add(OBJ_Datnuoc(postlist[i].idDatnuoc, postlist[i].idSoban, postlist[i].idNuoc,
-                                    postlist[i].soluong, postlist[i].ngay, postlist[i].thanhtoan, postlist[i].Xong_Don, postlist[i].tenNuoc))
+                                    postlist[i].soluong, postlist[i].ngay, postlist[i].thanhtoan, postlist[i].Xong_Don,
+                                    postlist[i].tenNuoc, postlist[i].GiaNiemYet))
 
 //                        //hiển thị ra adapter
 //                        var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)

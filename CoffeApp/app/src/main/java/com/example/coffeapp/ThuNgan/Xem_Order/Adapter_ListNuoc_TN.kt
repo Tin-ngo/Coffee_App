@@ -62,6 +62,9 @@ class Adapter_ListNuoc_TN(var context: Context, var mang_datnuoc: ArrayList<OBJ_
         viewholder.textviewSoban.text = "Số bàn: "+datnuoc.idSoban.toString()
         viewholder.textviewsoluong.text = "Số lượng: "+datnuoc.soluong.toString()
         viewholder.textviewngay.text = datnuoc.ngay
+        viewholder.textviewDongia.text = datnuoc.GiaNiemYet.toString()
+        var tongtien = datnuoc.GiaNiemYet * datnuoc.soluong
+        viewholder.textviewTongtien.text = tongtien.toString()
 
         return view as View
     }
@@ -72,6 +75,8 @@ class Adapter_ListNuoc_TN(var context: Context, var mang_datnuoc: ArrayList<OBJ_
         var textviewSoban : TextView
         var textviewsoluong : TextView
         var textviewngay : TextView
+        var textviewDongia : TextView
+        var textviewTongtien : TextView
 
         /* gán ánh xạ vào */
         init {
@@ -79,6 +84,9 @@ class Adapter_ListNuoc_TN(var context: Context, var mang_datnuoc: ArrayList<OBJ_
             textviewSoban = row.findViewById(R.id.txt_soban_tn) as TextView
             textviewsoluong = row.findViewById(R.id.txt_soluong_tn) as TextView
             textviewngay = row.findViewById(R.id.txt_ngay_tn) as TextView
+            textviewDongia = row.findViewById(R.id.txt_dongia_tn) as TextView
+            textviewTongtien = row.findViewById(R.id.txt_tongtien_tn) as TextView
+
         }
     }
 
