@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CoffeApp</string>
+    <!--    LOGIN-->
+    <string name="edt_user">Email or Phone</string>
+    <string name="edt_pass">PassWord</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+<!--    của phần Phục vụ-->
+    <string name="pv_datnuoc">Order Nước</string>
+    <string name="pv_xem">Bàn Đã Order</string>
+    <string name="pv_lienhe">Liên hệ</string>
+
+<!--    của phần Phục vụ-->
+    <string name="tn_xemOrder">Thông tin Order</string>
+    <string name="tn_thunhap">Thu Nhập</string>
+    <string name="tn_lienhe">Liên hệ</string>
+
+<!--    của phần Quầy-->
+    <string name="Q_Nuoccanlam">Nước cần làm</string>
+    <string name="Q_Nuoclamxong">Đã xong</string>
+    <string name="Q_lienhe">Liên hệ</string>
+
+</resources>
