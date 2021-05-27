@@ -22,6 +22,7 @@ import com.example.coffeapp.PV.Order.CustomAdapter
 import com.example.coffeapp.PV.Order.CustomDialogFragment_PV
 import com.example.coffeapp.PV.Order.DialogFragmment_detailNuoc
 import com.example.coffeapp.PV.Order_Xong.CustomAdapter_Datnuoc
+import kotlinx.android.synthetic.main.chat_item_listview.*
 import kotlinx.android.synthetic.main.phucvu_activity.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -146,9 +147,9 @@ class PhucvuActivity : AppCompatActivity() {
     private fun createNavigationItems() {
         // Create AHNavigationItems
         //Tạo AHNavigation
-        val item1 = AHBottomNavigationItem(R.string.pv_datnuoc, R.drawable.ic_order, R.color.xanhdatroi_laireu)
-        val item2 = AHBottomNavigationItem(R.string.pv_xem, R.drawable.ic_orderxong, R.color.xanh_reu)
-        val item3 = AHBottomNavigationItem(R.string.pv_lienhe, R.drawable.ic_lienhe, R.color.nau_xam)
+        val item1 = AHBottomNavigationItem(R.string.pv_datnuoc, R.drawable.ic_table, R.color.teal_700)
+        val item2 = AHBottomNavigationItem(R.string.pv_xem, R.drawable.ic_orderxong, R.color.colorPrimaryDark)
+        val item3 = AHBottomNavigationItem(R.string.pv_lienhe, R.drawable.ic_lienhe, R.color.xanh_reu)
 
         // Add AHNavigationItems
         bottomNavigation.addItem(item1)
@@ -341,8 +342,6 @@ class PhucvuActivity : AppCompatActivity() {
 
 
     fun All_Chat() {
-
-
 
         headerLabel.setTransitionVisibility(View.INVISIBLE)  // ẩn view headerlabel
         edt_text.setTransitionVisibility(View.VISIBLE)   //hiện chỗ nhập tin nhắn

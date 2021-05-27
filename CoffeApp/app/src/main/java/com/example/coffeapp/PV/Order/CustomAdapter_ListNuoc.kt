@@ -122,7 +122,6 @@ class CustomAdapter_ListNuoc(var context: Context, var mang_nuoc: ArrayList<OBJ_
                         view?.txt_KQ?.setText("Đã gọi lần : $solangoi_main")
                         Log.d("Kiểm tra", "Đã Xoá đơn nước!!")
                         Delete_datnuoc(soban, view?.txt_idNuoc_hidden?.text.toString().toInt(), formatted)
-                        Toast.makeText(context, "đã lưu", Toast.LENGTH_SHORT).show()
                     }
                 }catch(e: Exception){
                     Log.d("Kiểm tra", "Xoá nước lỗi!!")

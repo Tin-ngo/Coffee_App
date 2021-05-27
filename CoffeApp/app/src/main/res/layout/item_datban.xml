@@ -16,7 +16,7 @@
             android:text="Bàn: "
             android:layout_weight="1"
             android:textSize="15dp"
-            android:background="@color/mau_chu_dao"
+            android:background="@drawable/rounded_button"
             android:textColor="#000000"
             android:padding="10dip"
             android:gravity="center"/>
@@ -25,7 +25,7 @@
             android:text="Tên nước: "
             android:layout_weight="1"
             android:textSize="15dp"
-            android:background="@color/mau_chu_dao"
+            android:background="@drawable/rounded_button"
             android:textColor="#000000"
             android:padding="10dip"
             android:gravity="center"/>
@@ -42,7 +42,7 @@
             android:id="@+id/txt_soluong_dagoi"
             android:text="Số lượng: "
             android:layout_weight="2.5"
-            android:background="@color/mau_chu_dao"
+            android:background="@drawable/rounded_button"
             android:textColor="#000000"
             android:padding="10dip"
             android:textSize="15dp"
@@ -52,7 +52,8 @@
             android:id="@+id/txt_xong_don"
             android:text="Thanh toán: "
             android:layout_weight="1"
-            android:background="@color/mau_chu_dao"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#ff56ff"
             android:padding="10dip"
             android:textSize="15dp"
             android:gravity="left"/>
