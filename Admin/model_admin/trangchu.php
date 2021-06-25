@@ -107,6 +107,23 @@
         }
 
 
+        function delete_chat()
+         {
+            $query = "DELETE FROM chat";
+            $result = $this->conn->query($query);
+
+            if($result == true){
+
+                echo "<script> ";
+                echo "location.href='?action=trangchu';</script>";
+
+            }else{
+                echo "<script> alert('LỖI, Chưa xóa được chat');";
+                echo "location.href='?action=trangchu';</script>";
+            }
+         }
+
+
     }
      
 ?>

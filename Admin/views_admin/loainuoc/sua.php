@@ -16,7 +16,7 @@
            </tr>
             <tr>
                <td>Tên loại nước:</td>
-               <td><input required type="text" name="tenLN" value=<?php echo $data['tenLN']; ?> ></td>
+               <td><input required type="text" name="tenLN" value="<?php echo $data['tenLN']; ?>" ></td>
            </tr>
      <!--        <tr>
                <td>Hình ảnh:</td>

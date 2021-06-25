@@ -202,3 +202,11 @@ div.col-sm-4{
   margin-bottom: 10px;
   position: static;
 }
+
+
+a.del_chat{
+  color: red;
+}
+a.del_chat:hover{
+  text-decoration: none;
+}

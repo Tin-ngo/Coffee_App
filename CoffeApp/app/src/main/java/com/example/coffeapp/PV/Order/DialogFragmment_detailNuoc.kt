@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // lớp này để hiển thị ra cho nhân viên phụuc vụ bàn mấy và hiển thị listview các loại nước
 // phucvuactivity gọi lớp này
-class DialogFragmment_detailNuoc(var number:Int, var details : ArrayList<OBJ_Ban>) : DialogFragment() {
+class DialogFragmment_detailNuoc(var number:Int, var soban:Int, var details : ArrayList<OBJ_Ban>) : DialogFragment() {
 
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class DialogFragmment_detailNuoc(var number:Int, var details : ArrayList<OBJ_Ban
         var rootView : View = inflater.inflate(R.layout.fragment_custom_dialog_detailnuoc, container, false)
 
 
-        rootView.txt_banmay_detailnuoc.setText("Bàn ${number+1}")
+        rootView.txt_banmay_detailnuoc.setText("Bàn ${soban}")
 
         rootView.txt_tennuoc_detail.text = details[number].tenNuoc.toString()
         rootView.txt_soluong_detail.text = "số lượng: "+details[number].soluong.toString()

@@ -5,13 +5,14 @@
       <a class="pull-left themmoi" href="?action=themuser_giaodien"> Thêm mới</a>
 
       <div class="search_box pull-right" style="margin-right: 50px; margin-top: 0px;">
-           <form method="POST" action="?action=banner">
-          <input type="text" placeholder="Search By idbanner" name="timkiem_bn">&ensp;
+           <form method="POST" action="?action=user">
+          <input type="text" placeholder="Search By Name" name="timkiem_bn">&ensp;
           <button type="submit"><i class="fa fa-search"></i></button>
-          <a href="?action=banner" style="font-size: 15px;">All</a>
+          <a href="?action=user" style="font-size: 15px;">All</a>
         </form>
       </div>
 
+      <br>
       <br>
       <br>
    
@@ -20,28 +21,43 @@
           <thead>
                <tr>
                   <th>idUser</th>
-                  <th>idQ</th>
+                  <th>id/ Quyền</th>
                   <th>ho</th>
                   <th>ten</th>
                   <th>email</th>
                   <th>diachi</th>
                   <th>gioitinh</th>
                   <th>sdt</th>
-                  <th>tendn</th>
+                  <th>ten Nhân viên</th>
                   <th>matkhau</th>
-                  <th>hành đ</th>
+                  <th>hành động</th>
                </tr>
           </thead>
           <tbody>
               <?php foreach ($data as $row) { ?>
               <tr>
                   <td scope="row"><?= $row['idUser'] ?></td>
-                 <td><?= $row['idQuyen'] ?></td>
+                 <td><?= $row['idQuyen'] ?>/ <?= $row['tenquyen'] ?></td>
                  <td><?= $row['ho'] ?></td>
                  <td><?= $row['ten'] ?></td>
                  <td><?= $row['email'] ?></td>
                  <td><?= $row['diachi'] ?></td>
-                 <td><?= $row['gioitinh'] ?></td>
+                 <td>
+                      <?php 
+                      $gioitinh = '';
+                            if($row['gioitinh'] == 0)
+                            { 
+                              $gioitinh = 'Nam';
+                            }
+                            if ($row['gioitinh'] == 1) {
+                              $gioitinh = 'Nữ';
+                            }
+                            if ($row['gioitinh'] != 1 && $row['gioitinh'] != 0) {
+                              $gioitinh = 'Khác';
+                            }
+                            echo $gioitinh;
+                        ?>
+                  </td>
                  <td><?= $row['sodienthoai'] ?></td>
                  <td><?= $row['tendangnhap'] ?></td>
                  <td><?= $row['matkhau'] ?></td>

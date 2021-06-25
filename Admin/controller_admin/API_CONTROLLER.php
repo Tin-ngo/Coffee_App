@@ -159,6 +159,24 @@
 
 
 
+        public function vidu2()
+        {
+            $data = $this->api_model->vidu2();
+            echo json_encode($data);
+        }
+
+
+
+         public function soban_order()
+        {
+            $data = $this->api_model->soban_order();
+            echo json_encode($data);
+        }
+
+
+
+
+
 
 
         // CHAT
@@ -181,11 +199,13 @@
 
         // hết chát
 
-        //  public function soban_thungan()
-        // {
-        //     $data = $this->api_model->soban_thungan();
-        //     echo json_encode($data);
-        // }
+
+
+         public function Order_Xong() //r
+        {
+            $data = $this->api_model->Order_Xong();
+            echo json_encode($data);
+        }
 
 
         

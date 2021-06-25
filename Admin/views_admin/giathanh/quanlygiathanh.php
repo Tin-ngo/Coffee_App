@@ -6,10 +6,10 @@
       <a class="pull-left themmoi" href="?action=them_giathanh_giaodien"> Thêm mới</a>
 
       <div class="search_box pull-right" style="margin-right: 50px; margin-top: 0px;">
-          <form method="POST" action="?action=sanpham">
-          <input type="text" placeholder="Search By Name" name="timkiem_sp">&ensp;
+          <form method="POST" action="?action=giathanh">
+          <input type="text" placeholder="Search By Giá" name="timkiem">&ensp;
           <button type="submit"><i class="fa fa-search"></i></button>
-          <a href="?action=sanpham" style="font-size: 15px;">All </a>
+          <a href="?action=giathanh" style="font-size: 15px;">All </a>
         </form>
       </div>
 
@@ -22,7 +22,7 @@
                <tr>
                   <th>ID Giá Thành</th>
                   <th class="theadd">Giá niêm yết</th>
-                  <th class="theadd">id Khuyến mãi</th>
+                  <th class="theadd">id/ Khuyến mãi / giá trị</th>
                   <th>Hành động</th>
                </tr>
           </thead>
@@ -32,8 +32,8 @@
            
               <tr>
                   <td scope="row"><?= $value['idGiaThanh'] ?></td>
-                 <td><?= $value['GiaNiemYet'] ?></td>
-                  <td><?= $value['idKM'] ?></td>
+                 <td><?= number_format($value['GiaNiemYet']) ?> vnd</td>
+                  <td><?= $value['idKM']?>/ <?= $value['LoaiKM']?>/ <?= number_format($value['GiatriKM'])?> vnd</td>
                   <td>
                       <!-- để ý dấu bằng  trong href -->
                       <a href="?action=xemgiathanh&id=<?= $value['idGiaThanh'] ?>" type="button" class="btn btn-light">Chi tiết</a>

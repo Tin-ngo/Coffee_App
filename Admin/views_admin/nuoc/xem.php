@@ -1,10 +1,10 @@
 <div id="viewport">
 
-<div class="container-fluid" id="noidung">
+<div class="container-fluid row" id="noidung">
       <h4>Database nguoidung</h4>
 
       
-      <div style="background-color: #e5e5e5; padding: 60px 50px 10px; color:gray;border-radius: 20px;">
+      <div class="col-sm-6" style="background-color: #e5e5e5; padding: 60px 50px 10px; color:gray;border-radius: 20px; float:left;">
 
         <table border="1" cellpadding="5">
           <tr>
@@ -17,20 +17,16 @@
             <td><h4> &emsp;<?= $data['tenNuoc'];   ?>  </h4></td>
           </tr>
           <tr>
-            <td><h4>idLoaiNuoc</h4></td>
-            <td><h4> &emsp;<?= $data['idLoaiNuoc'];   ?>  </h4></td>
-          </tr>
-          <tr>
-            <td><h4>anh1 </h4></td>
-            <td><h4> &emsp;<?= $data['hinhanh'];   ?>  </h4></td>
+            <td><h4>id/ tenLoaiNuoc</h4></td>
+            <td><h4> &emsp;<?= $data['idLoaiNuoc'];?>/ <?= $data['tenLN']; ?>  </h4></td>
           </tr>
           <tr>
             <td><h4>Mô tả </h4></td>
             <td><h4> &emsp;<?= $data['mota'];   ?>  </h4></td>
           </tr>
           <tr>
-            <td><h4>id Giá thành </h4></td>
-            <td><h4> &emsp;<?= $data['idGiaThanh'];   ?>  </h4></td>
+            <td><h4>id/ Giá thành </h4></td>
+            <td><h4> &emsp;<?= $data['idGiaThanh'];?>/ <?= number_format($data['GiaNiemYet']);?> vnd  </h4></td>
           </tr>
           
          <!--    <td><h4>Chức vụ </h4></td>
@@ -45,6 +41,11 @@
         <br>
         <br>
         <br>
+      </div>
+
+
+      <div class="col-sm-6" style="padding: 60px;">
+        <h4> &emsp;<img src="public_admin/image/nuoc/<?= $data['hinhanh'];?>" alt=""></h4>
       </div>
      
 

@@ -14,11 +14,28 @@ interface MyAPIInterface {
     fun getUrl(@Url a:String): Call<ArrayList<OBJ_User>>
 
 
-    //Show dữ liệu bản soban innerjoin
+    //Show dữ liệu bản soban innerjoin bàn trống
     @GET("index.php?action=API_SOBAN")
     fun getSoban(): Call<Any>
     @GET
     fun getUrl_soban(@Url a:String): Call<ArrayList<OBJ_Ban>>
+
+    //Show dữ liệu bản soban innerjoin bàn đã order
+    @GET("index.php?action=API_SOBAN_Order")
+    fun getSoban_order(): Call<Any>
+    @GET
+    fun getUrl_soban_order(@Url a:String): Call<ArrayList<OBJ_Ban>>
+
+
+
+
+
+
+
+
+
+
+
 
     //Show dữ liệu bản soban không có innerjoin
     @GET("index.php?action=LAY_SOBAN")
@@ -139,11 +156,12 @@ interface MyAPIInterface {
 
     //HẾT CHAT
 
-    //Show dữ liệu bản soban bên thu ngân select where
+    //Show dữ liệu select where - vừa làm
     @GET("index.php")
-    fun get_Soban_thungan(@Query("idSoban") id:Int):  Call<ArrayList<OBJ_Datnuoc>>
+    fun getUrl_soban2(@Query("idSoban") id:Int):  Call<ArrayList<OBJ_Ban>>
     @GET
     fun getUrl_soban_notin(@Url a:String): Call<ArrayList<OBJ_Datnuoc>>
+
 
 
 

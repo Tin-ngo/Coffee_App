@@ -27,10 +27,18 @@
             require_once('views_admin/index.php');
     	}
 
+
+        public function all_phanquyen()
+        {
+            $data_phanquyen = $this->user_model->all_phanquyen();
+            require_once('views_admin/index.php');
+        }
+
         public function details() 
         {
             $id = isset($_GET['id']) ? $_GET['id'] : 1;
             $data = $this->user_model->find($id);
+            $data_phanquyen = $this->user_model->all_phanquyen();
             require_once('views_admin/index.php');
         }
 
@@ -49,7 +57,7 @@
             $idUser = filter_input(INPUT_POST, 'iduser');
 
             $this->user_model->update($idUser, $idQuyen, $ho, $ten, $email, $diachi, $gioitinh, $sodienthoai, $tendangnhap, $matkhau);
-
+            require_once('views_admin/index.php');
          }
 
 

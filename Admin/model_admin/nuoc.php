@@ -16,8 +16,12 @@
 
     	function all()
     	{
-    		$query = "SELECT * FROM nuoc ORDER BY idNuoc ASC";
-
+    		$query = "SELECT * FROM nuoc 
+                        INNER JOIN loainuoc 
+                        ON nuoc.idLoaiNuoc = loainuoc.idLoaiNuoc
+                        INNER JOIN giathanh
+                        ON nuoc.idGiaThanh = giathanh.idGiaThanh
+                        ORDER BY idNuoc";
     		$result = $this->conn->query($query);
 
     		$data = array();
@@ -30,9 +34,46 @@
     	}
 
 
+        function All_LoaiNuoc()
+        {
+            $query = "SELECT * FROM loainuoc";
+            $result = $this->conn->query($query);
+
+            $data = array();
+
+            while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+            }
+
+            return $data;
+        }
+
+
+        function All_GiaThanh()
+        {
+            $query = "SELECT * FROM giathanh";
+            $result = $this->conn->query($query);
+
+            $data = array();
+
+            while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+            }
+
+            return $data;
+        }
+
+
         function timkiem($timkiem)
         {
-            $query = "SELECT * FROM nuoc WHERE tenNuoc LIKE '%$timkiem%' ORDER BY idNuoc";
+            // $query = "SELECT * FROM nuoc WHERE tenNuoc LIKE '%$timkiem%' ORDER BY idNuoc";
+            $query = "SELECT * FROM nuoc 
+                        INNER JOIN loainuoc 
+                        ON nuoc.idLoaiNuoc = loainuoc.idLoaiNuoc
+                        INNER JOIN giathanh
+                        ON nuoc.idGiaThanh = giathanh.idGiaThanh
+                        WHERE tenNuoc LIKE '%$timkiem%' 
+                        ORDER BY idNuoc";
 
             $result = $this->conn->query($query);
 
@@ -48,9 +89,15 @@
 
 
 
+
         function find($id)
         {
-            $query = "SELECT * FROM nuoc WHERE idNuoc=$id";
+            $query = "SELECT * FROM nuoc 
+                        INNER JOIN loainuoc 
+                        ON nuoc.idLoaiNuoc = loainuoc.idLoaiNuoc
+                        INNER JOIN giathanh
+                        ON nuoc.idGiaThanh = giathanh.idGiaThanh
+                         WHERE idNuoc=$id";
             return $this->conn->query($query)->fetch_assoc();
         }
 
@@ -97,8 +144,8 @@
                 echo "location.href='?action=nuoc';</script>";
 
             }else{
-                echo "<script> alert('LỖI, Chưa xóa được người dùng');";
-                echo "location.href='?action=trangchu';</script>";
+                echo "<script> alert('LỖI');";
+                echo "location.href='?action=nuoc';</script>";
             }
          }
 

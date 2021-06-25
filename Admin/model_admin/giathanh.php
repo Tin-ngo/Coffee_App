@@ -46,7 +46,10 @@
     	function all()
     	{
             
-    		$query = "SELECT * FROM giathanh ORDER BY idGiaThanh";
+    		$query = "SELECT * FROM giathanh 
+                            INNER JOIN khuyenmai
+                            ON giathanh.idKM = khuyenmai.idKM
+                            ORDER BY idGiaThanh";
 
     		$result = $this->conn->query($query);
 
@@ -59,9 +62,31 @@
     		return $data;
     	}
 
-        function timkiem_sp($timkiem_sp, $batdau, $gioihan)
+
+        function all_km()
         {
-            $query = "SELECT * FROM sanpham WHERE tenSP LIKE '%$timkiem_sp%' LIMIT $batdau, $gioihan";
+            
+            $query = "SELECT * FROM khuyenmai ORDER BY idKM";
+
+            $result = $this->conn->query($query);
+
+            $data = array();
+
+            while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+            }
+
+            return $data;
+        }
+
+
+
+        function timkiem($timkiem_sp)
+        {
+            $query = "SELECT * FROM giathanh 
+                            INNER JOIN khuyenmai
+                            ON giathanh.idKM = khuyenmai.idKM
+                             WHERE GiaNiemYet LIKE '%$timkiem_sp%'";
 
             $result = $this->conn->query($query);
 
@@ -80,7 +105,11 @@
 
     	function find($id)
         {
-             $query = "SELECT * FROM giathanh WHERE idGiaThanh=$id"; 
+             $query = "SELECT * FROM giathanh 
+                            INNER JOIN khuyenmai
+                            ON giathanh.idKM = khuyenmai.idKM
+                            WHERE idGiaThanh=$id
+                            ORDER BY idGiaThanh"; 
             return $this->conn->query($query)->fetch_assoc();
         }
 

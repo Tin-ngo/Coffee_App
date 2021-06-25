@@ -3,6 +3,7 @@ package com.example.coffeapp.PV
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -22,6 +23,7 @@ import com.example.coffeapp.PV.Order.CustomAdapter
 import com.example.coffeapp.PV.Order.CustomDialogFragment_PV
 import com.example.coffeapp.PV.Order.DialogFragmment_detailNuoc
 import com.example.coffeapp.PV.Order_Xong.CustomAdapter_Datnuoc
+import com.example.coffeapp.PV.Order_Xong.DialogFragment_OrderXong
 import kotlinx.android.synthetic.main.chat_item_listview.*
 import kotlinx.android.synthetic.main.phucvu_activity.*
 import retrofit2.Call
@@ -33,7 +35,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.ArrayList
 
 class PhucvuActivity : AppCompatActivity() {
-
 
     // Lấy API
     val BASE_URL = "http://10.0.2.2/Android/CoffeApp/Admin/"
@@ -65,16 +66,15 @@ class PhucvuActivity : AppCompatActivity() {
                     // gọi CustomAdapter để hiển thị listview các bàn và số bàn để click vào thì gọi nước
                     // gọi CustomDialogFragment để HIỂN THỊ HỘP THOẠI khi người dùng click vào từng bàn
                     // gọi CustomAdapter_nuoc để HIỂN THỊ RA CÁC LOẠI NƯỚC vào trong listview đặt trong fragment
-                    headerTxt.text = "Số bàn"
-                    getBan()
+                    headerTxt.text = "Số bàn trống"
+                    getBan_trong()
                 }
                 1 -> {
                     headerTxt.text = "Bàn đã order nước"
-                    getDatnuoc()
+                    getBan_order()
                 }
                 2 -> {
                     headerTxt.text = "Liên hệ"
-
                     All_Chat()
                 }
                 else -> {
@@ -188,97 +188,161 @@ class PhucvuActivity : AppCompatActivity() {
 
 
 
-//  // Lấy dữ lịệu từ API
-//    fun getBan() {
-//      myRetrofitAPI.getUrl_soban("http://10.0.2.2/Android/CoffeApp/Admin/index.php?action=API_SOBAN")?.enqueue(
-//              object :
-//                      Callback<ArrayList<OBJ_Ban>> {
-//                  override fun onFailure(call: Call<ArrayList<OBJ_Ban>>, t: Throwable) {
-//                      Log.d("onFailure API call", "error")
-//                  }
-//                  override fun onResponse(
-//                          call: Call<ArrayList<OBJ_Ban>>?,
-//                          response: Response<ArrayList<OBJ_Ban>>?
-//                  ) {
-//                      var postlist: ArrayList<OBJ_Ban>? = response?.body() as ArrayList<OBJ_Ban>
-//                      var post = arrayOfNulls<String>(postlist!!.size)
-//                      var array: ArrayList<OBJ_Ban> = ArrayList()    // tạo mảng để hiển thị ra bên gridview
-//                      for (i in postlist.indices) {
-//                          // thêm dữ liệu vào mảng postlist
-//                          post[i] = postlist[i].idSoban.toString()
-//                          array.add(OBJ_Ban(i+1, postlist[i].idDatnuoc, postlist[i].thanhtoan, postlist[i].Xong_Don,
-//                                  postlist[i].soluong, postlist[i].tenNuoc, postlist[i].idGiaThanh, postlist[i].GiaNiemYet, R.drawable.table))
-////                          array.add(OBJ_Ban(i,  postlist[i].tenNuoc, postlist[i].idDatnuoc))  //thêm dl vào mảng array gồm id và hình bàn
-////                        //hiển thị ra adapter
-////                        var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
-////                        myListView.adapter = adapter
-//                          // Thêm dữ liệu- mảng vừa tạo vào GridView và tạo sự kiện khi click vào từng dòng trong gridview
-//
-//                          headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
-//                          edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
-//                          btn_send.setTransitionVisibility(View.INVISIBLE)   //ẩn nút gửi tin nhắn
-//                          // có thể dùng myListView đã khai báo ở trên
-//                          myListView_phucvu_activity.adapter = CustomAdapter(applicationContext, array)
-//                          myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
-//                              adapterView, view, position, id ->
-//                              if (postlist[position].idDatnuoc.equals(0)) {// || postlist[position].thanhtoan.equals(1)
-//                                  //nếu bàn chưa được đặt hoặc bàn đã thanh toán thì chưa có khách
-//                                  var dialog = CustomDialogFragment_PV(position)   //hiển thị dialog khi click
-//                                  dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-//                              } else {  //khi bàn đã có khách
-//                                  var dialog = DialogFragmment_detailNuoc(position, array)   //hiển thị dialog khi click
-//                                  dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-//                              }
-//                          }
-//                      }
-//                  }
-//              })
-//  }
-//    // Hết API getBan()
+
+
+
+
+  // Lấy dữ lịệu từ API
+    fun getBan_trong() {
+      myRetrofitAPI.getUrl_soban("http://10.0.2.2/Android/CoffeApp/Admin/index.php?action=API_SOBAN")?.enqueue(
+              object :
+                      Callback<ArrayList<OBJ_Ban>> {
+                  override fun onFailure(call: Call<ArrayList<OBJ_Ban>>, t: Throwable) {
+                      Log.d("onFailure API call", "error")
+                  }
+                  override fun onResponse(
+                          call: Call<ArrayList<OBJ_Ban>>?,
+                          response: Response<ArrayList<OBJ_Ban>>?
+                  ) {
+                      var postlist: ArrayList<OBJ_Ban>? = response?.body() as ArrayList<OBJ_Ban>
+                      var post = arrayOfNulls<String>(postlist!!.size)
+                      var array: ArrayList<OBJ_Ban> = ArrayList()    // tạo mảng để hiển thị ra bên gridview
+                      for (i in postlist.indices) {
+                          // thêm dữ liệu vào mảng postlist
+                          post[i] = postlist[i].idSoban.toString()
+                          array.add(OBJ_Ban(postlist[i].idSoban, postlist[i].idDatnuoc, postlist[i].thanhtoan, postlist[i].Xong_Don,
+                                  postlist[i].soluong, postlist[i].tenNuoc, postlist[i].idGiaThanh, postlist[i].GiaNiemYet, R.drawable.table))
+//                          array.add(OBJ_Ban(i,  postlist[i].tenNuoc, postlist[i].idDatnuoc))  //thêm dl vào mảng array gồm id và hình bàn
+//                        //hiển thị ra adapter
+//                        var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
+//                        myListView.adapter = adapter
+                          // Thêm dữ liệu- mảng vừa tạo vào GridView và tạo sự kiện khi click vào từng dòng trong gridview
+
+                          headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
+                          edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
+                          btn_send.setTransitionVisibility(View.INVISIBLE)   //ẩn nút gửi tin nhắn
+                          // có thể dùng myListView đã khai báo ở trên
+                          myListView_phucvu_activity.setNumColumns(2)
+                          myListView_phucvu_activity.adapter = CustomAdapter(applicationContext, array)
+                          myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
+                              adapterView, view, position, id ->
+                              if (postlist[position].idDatnuoc.equals(0)) {// || postlist[position].thanhtoan.equals(1)
+                                  //nếu bàn chưa được đặt hoặc bàn đã thanh toán thì chưa có khách
+                                  var dialog = CustomDialogFragment_PV(postlist[position].idSoban)   //hiển thị dialog khi click
+                                  dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+                              } else {  //khi bàn đã có khách
+                                  var dialog = DialogFragmment_detailNuoc(position,postlist[position].idSoban, array)   //hiển thị dialog khi click
+                                  dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+                              }
+                          }
+                      }
+                  }
+              })
+  }
+    // Hết API getBan()
 
 
     // Lấy dữ lịệu từ API
-    fun getBan() {
-        myRetrofitAPI.getUrl_soban_notjoin("http://10.0.2.2/Android/CoffeApp/Admin/index.php?action=LAY_SOBAN")?.enqueue(
+    fun getBan_order() {
+        headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
+        edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
+        btn_send.setTransitionVisibility(View.INVISIBLE)   //ẩn nút gửi tin nhắn
+        myRetrofitAPI.getUrl_soban_order("http://10.0.2.2/Android/CoffeApp/Admin/index.php?action=API_SOBAN_Order")?.enqueue(
                 object :
-                        Callback<ArrayList<OBJ_BAN_notjion>> {
-                    override fun onFailure(call: Call<ArrayList<OBJ_BAN_notjion>>, t: Throwable) {
+                        Callback<ArrayList<OBJ_Ban>> {
+                    override fun onFailure(call: Call<ArrayList<OBJ_Ban>>, t: Throwable) {
                         Log.d("onFailure API call", "error")
                     }
                     override fun onResponse(
-                            call: Call<ArrayList<OBJ_BAN_notjion>>?,
-                            response: Response<ArrayList<OBJ_BAN_notjion>>?
+                            call: Call<ArrayList<OBJ_Ban>>?,
+                            response: Response<ArrayList<OBJ_Ban>>?
                     ) {
-                        var postlist: ArrayList<OBJ_BAN_notjion>? = response?.body() as ArrayList<OBJ_BAN_notjion>
+                        var postlist: ArrayList<OBJ_Ban>? = response?.body() as ArrayList<OBJ_Ban>
                         var post = arrayOfNulls<String>(postlist!!.size)
-                        var array: ArrayList<OBJ_BAN_notjion> = ArrayList()    // tạo mảng để hiển thị ra bên gridview
-
+                        var array: ArrayList<OBJ_Ban> = ArrayList()    // tạo mảng để hiển thị ra bên gridview
                         for (i in postlist.indices) {
                             // thêm dữ liệu vào mảng postlist
-                            post[i] = postlist[i].idSoban.toString()
-                            array.add(OBJ_BAN_notjion(postlist[i].idSoban, R.drawable.table))
+                                post[i] = postlist[i].idSoban.toString()
+                                    array.add(OBJ_Ban(postlist[i].idSoban, postlist[i].idDatnuoc, postlist[i].thanhtoan, postlist[i].Xong_Don,
+                                            postlist[i].soluong, postlist[i].tenNuoc, postlist[i].idGiaThanh, postlist[i].GiaNiemYet, R.drawable.table))
 
-                            headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
-                            edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
-                            btn_send.setTransitionVisibility(View.INVISIBLE)   //ẩn nút gửi tin nhắn
+//                          array.add(OBJ_Ban(i,  postlist[i].tenNuoc, postlist[i].idDatnuoc))  //thêm dl vào mảng array gồm id và hình bàn
+//                        //hiển thị ra adapter
+//                        var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
+//                        myListView.adapter = adapter
+                            // Thêm dữ liệu- mảng vừa tạo vào GridView và tạo sự kiện khi click vào từng dòng trong gridview
+
+
                             // có thể dùng myListView đã khai báo ở trên
                             myListView_phucvu_activity.setNumColumns(2)
                             myListView_phucvu_activity.adapter = CustomAdapter(applicationContext, array)
                             myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
                                 adapterView, view, position, id ->
 
-                                // HIỂN THỊ LIST VIEW
-                                var dialog = CustomDialogFragment_PV(position)   //hiển thị dialog khi click
-                                dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-
-                                //SỬ HIỂN THỊ CHI TIẾT MỘT DIALOGFRAGMENT
-
+                                // ĐANG SỬA CHỖ NÀY
+//                                if (postlist[position].idDatnuoc.equals(0)) {// || postlist[position].thanhtoan.equals(1)
+//                                    //nếu bàn chưa được đặt hoặc bàn đã thanh toán thì chưa có khách
+//                                    var dialog = CustomDialogFragment_PV(position)   //hiển thị dialog khi click
+//                                    dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+//                                } else {  //khi bàn đã có khách
+//                                    var dialog = DialogFragmment_detailNuoc(position, postlist[position].idSoban, array)   //hiển thị dialog khi click
+//                                    dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+//                                }
+                                    var dialog = DialogFragment_OrderXong(postlist[position].idSoban)   //hiển thị dialog khi click
+                                    dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
                             }
                         }
                     }
                 })
     }
     // Hết API getBan()
+
+
+
+//
+//
+//    // Lấy dữ lịệu từ API
+//    fun getBan() {
+//        myRetrofitAPI.getUrl_soban_notjoin("http://10.0.2.2/Android/CoffeApp/Admin/index.php?action=LAY_SOBAN")?.enqueue(
+//                object :
+//                        Callback<ArrayList<OBJ_BAN_notjion>> {
+//                    override fun onFailure(call: Call<ArrayList<OBJ_BAN_notjion>>, t: Throwable) {
+//                        Log.d("onFailure API call", "error")
+//                    }
+//                    override fun onResponse(
+//                            call: Call<ArrayList<OBJ_BAN_notjion>>?,
+//                            response: Response<ArrayList<OBJ_BAN_notjion>>?
+//                    ) {
+//                        var postlist: ArrayList<OBJ_BAN_notjion>? = response?.body() as ArrayList<OBJ_BAN_notjion>
+//                        var post = arrayOfNulls<String>(postlist!!.size)
+//                        var array: ArrayList<OBJ_BAN_notjion> = ArrayList()    // tạo mảng để hiển thị ra bên gridview
+//
+//                        for (i in postlist.indices) {
+//                            // thêm dữ liệu vào mảng postlist
+//                            post[i] = postlist[i].idSoban.toString()
+//                            array.add(OBJ_BAN_notjion(postlist[i].idSoban, R.drawable.table))
+//
+//                            headerLabel.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
+//                            edt_text.setTransitionVisibility(View.INVISIBLE)   //ẩn chỗ nhập tin nhắn
+//                            btn_send.setTransitionVisibility(View.INVISIBLE)   //ẩn nút gửi tin nhắn
+//                            // có thể dùng myListView đã khai báo ở trên
+//                            myListView_phucvu_activity.setNumColumns(2)
+//                            myListView_phucvu_activity.adapter = CustomAdapter(applicationContext, array)
+//                            myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
+//                                adapterView, view, position, id ->
+//
+//                                // HIỂN THỊ LIST VIEW
+//                                var dialog = CustomDialogFragment_PV(position)   //hiển thị dialog khi click
+//                                dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
+//
+//                                //SỬ HIỂN THỊ CHI TIẾT MỘT DIALOGFRAGMENT
+//
+//                            }
+//                        }
+//                    }
+//                })
+//    }
+//    // Hết API getBan()
 
 
 
@@ -354,9 +418,10 @@ class PhucvuActivity : AppCompatActivity() {
             idQuyen = intent2.getStringExtra("idQuyen").toString()
 
             btn_send.setOnClickListener {
-                Log.d("test", "Đã gửi idQuyen ${idQuyen} Nội dung ${edt_text.text}")
-                Insert_Chat(idQuyen.toInt(), edt_text.text.toString())
-                edt_text.setText("")
+                    Log.d("test", "Đã gửi idQuyen ${idQuyen} Nội dung ${edt_text.text}")
+                    Insert_Chat(idQuyen.toInt(), edt_text.text.toString())
+                    edt_text.setText("")
+                    All_Chat()
             }
 
         }
@@ -414,8 +479,16 @@ class PhucvuActivity : AppCompatActivity() {
         })
     }
 
-
-
+//
+//    fun Load(){
+//        if (Build.VERSION.SDK_INT >= 11) {
+//            recreate()
+//        } else {
+//            val intent = intent
+//            finish()
+//            startActivity(intent)
+//        }
+//    }
 
 
 

@@ -31,8 +31,8 @@
     	}
 
          function timkiem_lsp($timkiem_lsp)
-        {
-            $query = "SELECT * FROM loainuoc WHERE tenLN LIKE '%$timkiem_lsp%' ORDER BY idLN";
+        {   
+            $query = "SELECT * FROM loainuoc WHERE tenLN LIKE '%$timkiem_lsp%' ORDER BY idLoainuoc";
 
             $result = $this->conn->query($query);
 

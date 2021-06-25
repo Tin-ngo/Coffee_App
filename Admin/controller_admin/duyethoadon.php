@@ -16,14 +16,9 @@
     		$this->hoadon_model = new hoadon();
     	}
 
-    	public function list()
+    	public function list_hoadon()
     	{
-    		 if(isset($_POST['timkiem_hd'])){
-                $timkiem_hd = $_POST['timkiem_hd'];
-                $data = $this->hoadon_model->timkiem_hd($timkiem_hd);
-            }else{
-                $data = $this->hoadon_model->all();
-            }
+            $data = $this->hoadon_model->all();
             require_once('views_admin/index.php');
     	}
 

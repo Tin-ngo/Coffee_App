@@ -23,7 +23,7 @@ import java.util.ArrayList
 
 // lớp này để hiển thị ra danh sách các bàn
 // PhucvuActivity gọi lớp này
-class CustomAdapter(var context : Context, var mang_ban : ArrayList<OBJ_BAN_notjion>) : BaseAdapter() {
+class CustomAdapter(var context : Context, var mang_ban : ArrayList<OBJ_Ban>) : BaseAdapter() {
     override fun getCount(): Int {
         return mang_ban.size
     }
@@ -46,10 +46,7 @@ class CustomAdapter(var context : Context, var mang_ban : ArrayList<OBJ_BAN_notj
             view = layoutinflater.inflate(R.layout.item_ban, null)
             viewholder = ViewHolder(view)
 
-
             view.tag = viewholder /* Lưu các ánh xạ để cho lần run sau sửu dụng mà không cần khoải tạo lại */
-
-
 
         } else {  /* khi người dùng run lần 2 lần 3 thì lấy các giá trị đã lưu */
             view = convertView
@@ -57,12 +54,10 @@ class CustomAdapter(var context : Context, var mang_ban : ArrayList<OBJ_BAN_notj
 
         }
 
-
         /* gawsn dữ liệu vào */
-        var ban: OBJ_BAN_notjion = getItem(position) as OBJ_BAN_notjion
+        var ban: OBJ_Ban = getItem(position) as OBJ_Ban
         viewholder.textviewtenmonan.text = ban.idSoban.toString()
         viewholder.imageviewmonan.setImageResource(ban.hinhanh)
-
 
 
 
@@ -79,8 +74,6 @@ class CustomAdapter(var context : Context, var mang_ban : ArrayList<OBJ_BAN_notj
             imageviewmonan = row.findViewById(R.id.image_ban) as ImageView
         }
     }
-
-
 
 
 }

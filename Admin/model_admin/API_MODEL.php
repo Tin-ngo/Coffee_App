@@ -108,16 +108,14 @@
         function all_soban()  
         {
 
-            $query = "SELECT
-            soban.idSoban,
-             datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong,
-            nuoc.tenNuoc, 
-            nuoc.idGiaThanh, giathanh.GiaNiemYet 
-             FROM soban 
-             LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban 
-             LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
-             LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh
-            ORDER BY soban.idSoban";
+            // $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh WHERE datnuoc.idDatnuoc IS NULL ORDER BY soban.idSoban";
+            $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban 
+                LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban 
+                LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
+                LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
+                WHERE datnuoc.thanhtoan = 1 || datnuoc.idDatnuoc IS NULL 
+                ORDER BY soban.idSoban";
+
 
             $result = $this->api->query($query);
 
@@ -129,6 +127,38 @@
 
             return $data;
         }
+
+        function soban_order()  
+        {
+
+            // $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
+            // WHERE datnuoc.idDatnuoc IS NOT NULL 
+            // ORDER BY soban.idSoban";
+
+
+//             $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet
+// FROM soban 
+// LEFT JOIN datnuoc ON  soban.idSoban = datnuoc.idSoban
+// LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
+// LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
+//             WHERE datnuoc.idDatnuoc IS NOT NULL 
+//             ORDER BY soban.idSoban";
+
+            // $query = "SELECT DISTINCT soban.idSoban FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh WHERE datnuoc.idDatnuoc IS NOT NULL ORDER BY soban.idSoban";
+            $query = "SELECT DISTINCT soban.idSoban FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh WHERE datnuoc.thanhtoan = 0 && datnuoc.idDatnuoc IS NOT NULL ORDER BY soban.idSoban";
+
+
+            $result = $this->api->query($query);
+
+            $data = array();
+
+            while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+            }
+
+            return $data;
+        }
+
 
 
 
@@ -162,8 +192,8 @@
             $ngay = filter_input(INPUT_POST, 'ngay');
 
 
-            $query = "INSERT INTO datnuoc(idSoban, idNuoc, soluong, ngay) 
-            VALUES ('$idSoban', '$idNuoc', '$soluong', '$ngay') ";
+            $query = "INSERT INTO datnuoc(idSoban, idNuoc, soluong, ngay, thanhtoan, Xong_Don) 
+            VALUES ('$idSoban', '$idNuoc', '$soluong', '$ngay', 0, 0) ";
 
             $result = $this->api->query($query);
 
@@ -174,7 +204,7 @@
             }
             else{
                 $data[] = array(
-                    'success'   =>  'lỗi'
+                    'success'   =>  'lỗi rồi kìa kk'
                 );
             }
             }else{
@@ -222,7 +252,7 @@
 // xong delete
 
 
-        function all_datnuoc_innerjoin()
+        function all_datnuoc_innerjoin()   // bàn đã order nước
         {
             
 //             $query = "SELECT * FROM datnuoc ORDER BY idDatnuoc";
@@ -234,13 +264,17 @@
             //          ORDER BY Xong_Don
             //         ";
 
+            $ngay = date("Y-m-d");
+
              $query = "SELECT * FROM datnuoc 
              INNER JOIN soban 
              INNER JOIN nuoc 
              ON datnuoc.idSoban = soban.idSoban && datnuoc.idNuoc = nuoc.idNuoc 
              INNER JOIN giathanh 
-             ON nuoc.idGiaThanh = giathanh.idGiaThanh ORDER BY Xong_Don
-                    ";
+             ON nuoc.idGiaThanh = giathanh.idGiaThanh
+             WHERE ngay = '$ngay'
+              ORDER BY Xong_Don
+            ";
 
             $result = $this->api->query($query);
 
@@ -504,6 +538,32 @@
 
 
 
+        function vidu2(){
+                // $tenLN = $_POST["tenLN"]
+            $idSoban = $_GET["idSoban"];
+
+             $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
+            WHERE  datnuoc.idSoban = '$idSoban'
+            ORDER BY soban.idSoban";
+
+
+            $result = $this->api->query($query);
+
+            $data = array();
+
+            while ($row = $result->fetch_assoc()) {
+               $data[] = $row;
+            }
+
+        
+
+        return $data;
+        
+    }
+
+
+
+
 
         function all_chat()
         {
@@ -553,44 +613,52 @@
         return $data;
         }
 
+        // HẾT CHAT
 
+
+
+        function Order_Xong()  
+        {
         
-        // function soban_thungan()  
-        // {
+        if(isset($_GET["idSoban"])){   
+
+            $idSoban = filter_input(INPUT_GET, 'idSoban');
+
+            // $query = "SELECT * FROM soban WHERE idSoban = '$idSoban' ";
+
+            $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet
+                FROM soban 
+                LEFT JOIN datnuoc ON  soban.idSoban = datnuoc.idSoban
+                LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
+                LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
+                WHERE soban.idSoban = '$idSoban' 
+                ORDER BY soban.idSoban";
+
+            $result = $this->api->query($query);
+            
+            if($result == true){
+                $data[] = array(
+                    'success'   =>  '1'
+                );
+            }
+            else{
+                $data[] = array(
+                    'success'   =>  'lỗi'
+                );
+            }
+            
+        }else{
+            $data[] = array(
+                'success'   =>  'no value'
+            );
+        }
+            return $data;
         
-        // if(isset($_POST["idSoban"])){   
+        }
 
-        //     $idSoban = filter_input(INPUT_POST, 'idSoban');
 
-        //     // $query = "SELECT * FROM datnuoc WHERE idSoban = '$idSoban' ";
-        //     // $query = "SELECT * FROM datnuoc 
-        //     //         INNER JOIN soban 
-        //     //         INNER JOIN nuoc 
-        //     //         ON datnuoc.idSoban = soban.idSoban
-        //     //             && datnuoc.idNuoc = nuoc.idNuoc
-        //     //         WHERE soban.idSoban = '$idSoban'
-        //     //         ORDER BY idDatnuoc";
-            // $query = "SELECT * FROM datnuoc 
-            //         INNER JOIN soban 
-            //         INNER JOIN nuoc 
-            //         ON datnuoc.idSoban = soban.idSoban
-            //             && datnuoc.idNuoc = nuoc.idNuoc
-            //             WHERE soban.idSoban = '$idSoban'
-            //          ORDER BY idDatnuoc";  #Xong_DOn
 
-        //     $result = $this->api->query($query);
-        //     $data = array();
-        //     while ($row = $result->fetch_assoc()) {
-        //        $data[] = $row;
-        //     }
-        // }else{
-        //     $data[] = array(
-        //         'success'   =>  'no value'
-        //     );
-        // }
-        //     return $data;
-        
-        // }
+       
 
 
       

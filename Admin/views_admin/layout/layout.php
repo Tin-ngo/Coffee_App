@@ -76,7 +76,7 @@
           </li>
           <li>
             <a href="#" style="margin-right: 30px;">
-          	<img class="anhuser" src="public_admin/image/author.jpg" alt="">&emsp;
+          	<img class="anhuser" src="https://tse3.mm.bing.net/th?id=OIP.2hAVCZRMcBjsE8AGQfWCVQHaHa&pid=Api&P=0&w=300&h=300" alt="">&emsp;
             <?php
             if(isset($_SESSION['tendangnhap'])){
               echo "Xin chào ". $_SESSION['tendangnhap'];

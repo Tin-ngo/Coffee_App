@@ -5,7 +5,14 @@
 
       <h1>THỐNG KÊ</h1>
       
-      <br><br>
+      <br>
+        <a class="del_chat" href="?action=delete_chat">
+            Làm sạch dữ liệu chat 
+            <i class="fa fa-trash"></i>
+         </a>
+      <br>
+      <br>
+      <br>
   
     
      <div class="col-sm-4">
@@ -86,10 +93,13 @@
                       ?>
           </div>
      </div>
+     
 
 
 
 </div>
+
+
 
 
 

@@ -1,14 +1,14 @@
 <?php
 
-// // Index này gọi tới controller
-// if(isset($_POST['idSoban'])){
-//         // chỉ hiển thị số bàn không dùng inner join 
+// Index này gọi tới controller
+if(isset($_GET['idSoban'])){
+        // chỉ hiển thị số bàn không dùng inner join 
  
-//             require_once('controller_admin/API_CONTROLLER.php');
-//             $controller_taikhoanobj = new API_CONTROLLER();
-//             $controller_taikhoanobj->soban_thungan();
+            require_once('controller_admin/API_CONTROLLER.php');
+            $controller_taikhoanobj = new API_CONTROLLER();
+            $controller_taikhoanobj->vidu2();
 
-//     }
+    }
 
 
 
@@ -141,6 +141,8 @@
             break;
 
 
+
+
 // CHAT
 
         case 'API_CHAT':
@@ -158,11 +160,23 @@
 
 //HẾT CHAT
 
-        // case 'SOBAN_THUNGAN':
-        //     require_once('controller_admin/API_CONTROLLER.php');
-        //     $controller_taikhoanobj = new API_CONTROLLER();
-        //     $controller_taikhoanobj->soban_thungan();
-        //     break;
+        case 'API_SOBAN_Order':
+            require_once('controller_admin/API_CONTROLLER.php');
+            $controller_taikhoanobj = new API_CONTROLLER();
+            $controller_taikhoanobj->soban_order();
+            break;
+
+
+
+
+
+
+// Đang làm phần  SELECT  WHERE   - LẤy OBJ_BAN
+        case 'Order_Xong':
+            require_once('controller_admin/API_CONTROLLER.php');
+            $controller_taikhoanobj = new API_CONTROLLER();
+            $controller_taikhoanobj->Order_Xong();
+            break;
 
 
         
@@ -187,7 +201,14 @@
             $controller_taikhoanobj = new trangchucontroller();
              $controller_taikhoanobj->dem();
             break;
-    
+        
+        case 'delete_chat':
+            require_once('controller_admin/home.php');
+            $controller_taikhoanobj = new trangchucontroller();
+             $controller_taikhoanobj->delete_chat();
+            break;
+
+
         case 'nuoc':           // đang sửa
             require_once('controller_admin/quanlynuoc.php');
             $nuocController = new nuocController();
@@ -209,7 +230,9 @@
             $controller_taikhoanobj->update();
             break;
         case 'them_giaodien':
-            require_once('views_admin/index.php');
+            require_once('controller_admin/quanlynuoc.php');
+            $controller_taikhoanobj = new nuoccontroller();
+            $controller_taikhoanobj->list_loainuoc();
             break;
         case 'them': 
             require_once('controller_admin/quanlynuoc.php');
@@ -274,7 +297,9 @@
             $controller_taikhoanobj->list();
             break;
         case 'themuser_giaodien':
-            require_once('views_admin/index.php');
+            require_once('controller_admin/quanlyuser.php');
+            $controller_taikhoanobj = new usercontroller();
+            $controller_taikhoanobj->all_phanquyen();
             break;
         case 'themuser':
             require_once('controller_admin/quanlyuser.php');
@@ -285,6 +310,7 @@
             require_once('controller_admin/quanlyuser.php');
             $controller_taikhoanobj = new usercontroller();
             $controller_taikhoanobj->details();
+            break;
         case 'suauser_xl': 
             require_once('controller_admin/quanlyuser.php');
             $controller_taikhoanobj = new usercontroller();
@@ -306,7 +332,7 @@
         case 'hoadon': 
             require_once('controller_admin/duyethoadon.php');
             $controller_taikhoanobj = new hoadoncontroller();
-            $controller_taikhoanobj->list();
+            $controller_taikhoanobj->list_hoadon();
             break;
         case 'xoahoadon':
             require_once('controller_admin/duyethoadon.php');
@@ -325,7 +351,9 @@
             $controller_taikhoanobj->list();
             break;
         case 'them_giathanh_giaodien':
-            require_once('views_admin/index.php');
+            require_once('controller_admin/quanlygiathanh.php');
+            $controller_taikhoanobj = new giathanhcontroller();
+            $controller_taikhoanobj->all_km();
             break;
         case 'them_giathanh': 
             require_once('controller_admin/quanlygiathanh.php');
@@ -367,6 +395,7 @@
             require_once('controller_admin/quanlykhuyenmai.php');
             $controller_taikhoanobj = new khuyenmaicontroller();
             $controller_taikhoanobj->list();
+            break;
         case 'themkhuyenmai_giaodien':
             require_once('views_admin/index.php');
              break;

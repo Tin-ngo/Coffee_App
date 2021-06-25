@@ -37,7 +37,7 @@ class CustomDialogFragment_PV(var number:Int) : DialogFragment() {
         var rootView : View = inflater.inflate(R.layout.fragment_custom_dialog_pv, container, false)
         var view_item_nuoc : View = inflater.inflate(R.layout.item_nuoc, container, false)
 
-        var so:Int = number+1
+        var so:Int = number
         rootView.txt_chonnuoc.setText("Bàn ${so}")  // lấy số bàn
 
 

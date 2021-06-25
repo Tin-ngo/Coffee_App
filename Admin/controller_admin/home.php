@@ -34,6 +34,15 @@
     		require_once('views_admin/index.php');
     	}
 
+
+        public function delete_chat()  
+        {
+            $this->trangchu_model->delete_chat();
+        }
+
+
+
+
        }
 
        

@@ -88,7 +88,7 @@ class CustomAdapter_ListNuoc(var context: Context, var mang_nuoc: ArrayList<OBJ_
             var solangoi :Int = 0
 // Xử lý khi click vô lưu
             view.btn_luu_nuoc.setOnClickListener {
-                Log.d("Lưu Số bàn", soban.toString())
+                Log.d("Lưu Số bàn", (soban).toString())
                 Log.d("Lưu ID Nước", view?.txt_idNuoc_hidden?.text.toString())
                 Log.d("Lưu Số lượng", soluong_nuoc.toString())
                 val current = LocalDateTime.now()
@@ -98,7 +98,7 @@ class CustomAdapter_ListNuoc(var context: Context, var mang_nuoc: ArrayList<OBJ_
                 // gọi hàm insert vào mysql
                 try {
                     var solangoi_main = ++solangoi
-                    Insert_datnuoc(soban+1, view?.txt_idNuoc_hidden?.text.toString().toInt(), soluong_nuoc, formatted)
+                    Insert_datnuoc(soban, view?.txt_idNuoc_hidden?.text.toString().toInt(), soluong_nuoc, formatted)
                     view?.txt_KQ?.setText("Đã gọi lần : $solangoi_main")
                     Log.d("Kiểm tra", "Đã gọi nước!!")
 
@@ -116,16 +116,14 @@ class CustomAdapter_ListNuoc(var context: Context, var mang_nuoc: ArrayList<OBJ_
                 val formatted = current.format(formatter)
                 Log.d("Time", formatted)
                 // gọi hàm insert vào mysql
-                try {
                     if (solangoi > 0) {
                         var solangoi_main = --solangoi
                         view?.txt_KQ?.setText("Đã gọi lần : $solangoi_main")
                         Log.d("Kiểm tra", "Đã Xoá đơn nước!!")
-                        Delete_datnuoc(soban, view?.txt_idNuoc_hidden?.text.toString().toInt(), formatted)
+                        Delete_datnuoc(soban+1, view?.txt_idNuoc_hidden?.text.toString().toInt(), formatted)
+                        Log.d("Xoá","id soban: "+(soban+1).toString() + "id nuoc "+ view?.txt_idNuoc_hidden?.text.toString() + formatted)
                     }
-                }catch(e: Exception){
-                    Log.d("Kiểm tra", "Xoá nước lỗi!!")
-                }
+
             }
 
 

@@ -1,7 +1,7 @@
 <div id="viewport">
 
 <div class="container-fluid" id="noidung">
-      <h4>Database hoadon</h4>
+      <h4>Database datnuoc</h4>
 
       <div class="search_box pull-right" style="margin-right: 50px; margin-top: 0px;">
           <form method="POST" action="?action=hoadon">
@@ -19,9 +19,13 @@
           <thead>
                <tr>
                   <th>idhoadon</th>
-                  <th class="theadd">idNuoc</th>
-                  <th class="theadd">Soluong</th>
-                  <th class="theadd">Ngày</th>
+                  <th class="theadd">ngày</th>
+                  <th class="theadd">số bàn</th>
+                  <th class="theadd">id Nước</th>
+                  <th class="theadd">Tên Nước</th>
+                  <th class="theadd">Số lượng</th>
+                  <th class="theadd">Giá niêm yết</th>
+                  <th class="theadd">Tổng tiền</th>
                   <th>Hành động</th>
                </tr>
           </thead>
@@ -30,18 +34,19 @@
                  
            
               <tr>
-                  <td scope="row"><?= $value['idHoaDon'] ?></td>
-                 <td><?= $value['idNuoc'] ?>  </td>
-                  <td><?= $value['Soluong'] ?></td>
-                  <td><?= $value['Ngay'] ?></td>
+                  <td scope="row"><?= $value['idDatnuoc'] ?></td>
+                 <td><?= $value['ngay'] ?>  </td>
+                  <td><?= $value['idSoban'] ?></td>
+                  <td><?= $value['idNuoc'] ?></td>
+                  <td><?= $value['tenNuoc'] ?></td>
+                  <td><?= $value['soluong'] ?></td>
+                  <td><?= number_format($value['GiaNiemYet']) ?> vnd</td>
+                  <td><?= number_format($value['GiaNiemYet']*$value['soluong']) ?> vnd</td>
                   
                   <td>
-                      <!-- để ý dấu bằng trong href -->
-                       <a href="?action=xemhoadon&id=<?= $value['idHoaDon'] ?>&idNuoc=<?= $value['idNuoc'] ?>" type="button" class="btn btn-light">Chi tiết</a>
-<!-- 
-                    <a href="?action=duyethoadon&id=<?= $value['idhoadon'] ?>&idSP=<?= $value['idSP'] ?>&soluongmua=<?php echo $value['soluongmua'] ?>" type="button" class="btn btn-primary">Duyệt hóa đơn</a> -->
+                   
                 
-                    <a href="?action=xoahoadon&id=<?= $value['idHoaDon'] ?>" onclick="return confirm('Bạn có thật sự muốn xóa ?');" type="button" class="btn btn-danger" title="Xóa">
+                    <a href="?action=xoahoadon&id=<?= $value['idDatnuoc'] ?>" onclick="return confirm('Bạn có thật sự muốn xóa ?');" type="button" class="btn btn-danger" title="Xóa">
                       <i class="fa fa-times"></i></a>
         
           

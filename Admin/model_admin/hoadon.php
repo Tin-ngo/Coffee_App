@@ -17,7 +17,11 @@
     	
     	function all()
     	{
-    		$query = "SELECT * FROM hoadon ORDER BY idHoaDon";
+    		$query = "SELECT datnuoc.idDatnuoc, datnuoc.ngay, datnuoc.idSoban, datnuoc.idNuoc, nuoc.tenNuoc, datnuoc.soluong, giathanh.GiaNiemYet 
+                        FROM datnuoc 
+                        INNER JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
+                        INNER JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh
+                        WHERE thanhtoan = '1' ";
 
     		$result = $this->conn->query($query);
 
@@ -58,7 +62,7 @@
 
          function delete($id)        //đang
          {
-            $query = "DELETE FROM hoadon WHERE idHoaDon='$id' ";
+            $query = "DELETE FROM datnuoc WHERE idDatnuoc='$id' ";
             $result = $this->conn->query($query);
 
             if($result == true){

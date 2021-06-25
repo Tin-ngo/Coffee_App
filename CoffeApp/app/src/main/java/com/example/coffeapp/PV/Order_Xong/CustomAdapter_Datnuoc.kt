@@ -112,7 +112,7 @@ class CustomAdapter_Datnuoc(var context : Context, var mang_datnuoc : ArrayList<
     }
 
 
-    //API update thanh toán => thay số 0 là số 1 trong cộ thanh toán
+    //API update thanh toán => thay số 1 là số 2 trong cột Xong_Don
     fun update_xongnuoc(Xong_Don: Int, idDatnuoc:Int) {
         myRetrofitAPI.update_xongnuoc(Xong_Don, idDatnuoc)?.enqueue(object : Callback<Any> {
             override fun onFailure(call: Call<Any>, t: Throwable) {

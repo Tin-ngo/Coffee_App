@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2021 lúc 10:15 AM
+-- Thời gian đã tạo: Th6 02, 2021 lúc 10:19 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.3.27
 
@@ -38,10 +38,12 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`idchat`, `idQuyen`, `NoiDung`) VALUES
-(20, 2, 'helo'),
-(22, 2, 'hello2'),
-(23, 2, 'hi'),
-(24, 2, 'hello chat');
+(1, 2, 'hhh'),
+(2, 2, ''),
+(3, 2, ''),
+(4, 2, 'phucvu'),
+(5, 2, 'phucvu'),
+(6, 1, 'quay');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,8 @@ CREATE TABLE `datnuoc` (
 --
 
 INSERT INTO `datnuoc` (`idDatnuoc`, `idSoban`, `idNuoc`, `soluong`, `ngay`, `thanhtoan`, `Xong_Don`) VALUES
-(10, 3, 2, 2, '2021-05-25', 1, 2);
+(26, 3, 1, 2, '2021-05-30', 0, 1),
+(29, 4, 2, 2, '2021-05-31', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,9 @@ ALTER TABLE `chat`
 -- Chỉ mục cho bảng `datnuoc`
 --
 ALTER TABLE `datnuoc`
-  ADD PRIMARY KEY (`idDatnuoc`);
+  ADD PRIMARY KEY (`idDatnuoc`),
+  ADD KEY `idNuoc` (`idNuoc`),
+  ADD KEY `idSoban` (`idSoban`);
 
 --
 -- Chỉ mục cho bảng `giathanh`
@@ -340,13 +345,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `idchat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idchat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `datnuoc`
 --
 ALTER TABLE `datnuoc`
-  MODIFY `idDatnuoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idDatnuoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `giathanh`
@@ -405,6 +410,13 @@ ALTER TABLE `user`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `datnuoc`
+--
+ALTER TABLE `datnuoc`
+  ADD CONSTRAINT `datnuoc_ibfk_1` FOREIGN KEY (`idNuoc`) REFERENCES `nuoc` (`idNuoc`),
+  ADD CONSTRAINT `datnuoc_ibfk_2` FOREIGN KEY (`idSoban`) REFERENCES `soban` (`idSoban`);
 
 --
 -- Các ràng buộc cho bảng `giathanh`

@@ -11,16 +11,25 @@
                <td>idUser: </td>
                <td>
                 <input disabled type="text" name="iduser" value=<?php echo $data['idUser']; ?>>
-                <input type="hidden" name="iduser" value=<?php echo $data['idUser']; ?> >
+                <input type="hidden" name="iduser" value="<?php echo $data['idUser']; ?>" >
               </td>
            </tr>
             <tr>
                <td>idQuyen:</td>
-               <td><input type="text" name="idQuyen" value=<?php echo $data['idQuyen']; ?> ></td>
+               <td>
+                  <select name="idQuyen" required>
+                  <?php foreach($data_phanquyen as $value){ ?>
+                        <option value = "<?= $value['idQuyen'] ?>"><?= $value['tenquyen'] ?></option>
+                  <?php } ?>
+                  </select>
+                  <input disabled type="text" name="idQuyen" value="<?php echo $data['idQuyen']; ?>/ <?= $data['tenquyen']?>" >
+               </td>
            </tr>
             <tr>
                <td>ho:</td>
-               <td><input type="text" name="ho" value=<?php echo $data['ho']; ?> ></td>
+               <td>
+                  <input type="text" name="ho" value="<?php echo $data['ho']; ?>" >
+               </td>
            </tr>
             <tr>
                <td>ten:</td>
@@ -36,7 +45,21 @@
            </tr>
             <tr>
                <td>giơitinh:</td>
-               <td><input type="text" name="gioitinh" value=<?php echo $data['gioitinh']; ?> ></td>
+               <td>
+                  <input type="radio" value="0" name="gioitinh" required> Nam
+                  &emsp;
+                  <input type="radio" value="1" name="gioitinh" required> Nữ
+                  &emsp;
+                  <input type="radio" value="2" name="gioitinh" required> Khác
+                  &emsp;
+                  <input disabled type="text" size="3" name="gioitinh" 
+                  value="<?php $gioitinh=""; if($data['gioitinh'] == 0){$gioitinh = 'Nam';}
+                                             if($data['gioitinh'] == 1){$gioitinh = 'Nữ';}
+                                             if($data['gioitinh'] == 2){$gioitinh = 'Khác';}
+                              echo $gioitinh;
+                        ?> " >
+
+               </td>
            </tr>
             <tr>
                <td>sdt:</td>

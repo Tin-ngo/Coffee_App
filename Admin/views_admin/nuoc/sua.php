@@ -16,23 +16,44 @@
            </tr>
             <tr>
                <td>idLoaiNuoc:</td>
-               <td><input  required type="text" name="idLoaiNuoc" value=<?php echo $data['idLoaiNuoc']; ?> ></td>
+               <td>
+                    <select style="padding: 5px;" name = "idLoaiNuoc" required>
+                     <?php foreach($data_loainuoc as $value){ ?>
+                        <option value = "<?= $value['idLoaiNuoc'] ?>"><?= $value['tenLN'] ?></option>
+                     <?php } ?>
+                  </select>
+                    <input  disabled type="text" name="idLoaiNuoc" size='10' 
+                        value="<?php echo $data['idLoaiNuoc']; ?>/ <?php echo $data['tenLN']; ?>" >
+                    
+                </td>
            </tr>
             <tr>
                <td>tên Nước:</td>
-               <td><input required type="text" name="tenNuoc" value=<?php echo $data['tenNuoc']; ?>></td>
+               <td><input required type="text" name="tenNuoc" value="<?php echo $data['tenNuoc']; ?>"></td>
            </tr>
             <tr>
                <td>hinhanh:</td>
-               <td><input required type="file" name="hinhanh" value=<?php echo $data['hinhanh']; ?>></td>
+               <td><input required type="file" name="hinhanh" value="<?php echo $data['hinhanh']; ?>"></td>
+                <td> <img src="public_admin/image/nuoc/<?= $data['hinhanh']?>" width="40" height="40" /></td>
            </tr>
             <tr>
               <td>Mô Tả:</td>
-              <td><input required type="text" name="mota" value=<?php echo $data['mota']; ?>></td>
+              <td><input required type="text" name="mota" value="<?php echo $data['mota']; ?>"></td>
            </tr>
             <tr>
                <td>id Giá Thành:</td>
-               <td><input required type="text" name="idGiaThanh" value=<?php echo $data['idGiaThanh']; ?>></td>
+               <td>
+                    <select style="padding: 5px;" name = "idGiaThanh" required>
+                     <?php foreach($data_giathanh as $value2){ ?>
+                        <option value = "<?= $value2['idGiaThanh'] ?>">
+                           <?= number_format($value2['GiaNiemYet'])?> vnd 
+                        </option>
+                     <?php } ?>
+                  </select>
+
+                    <input disabled type="text" size="10" name="idGiaThanh" 
+                    value="<?php echo $data['idGiaThanh'];?>/ <?php echo $data['GiaNiemYet']; ?>">
+                </td>
            </tr>
           
            <tr>

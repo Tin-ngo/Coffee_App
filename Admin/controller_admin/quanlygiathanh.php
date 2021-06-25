@@ -25,9 +25,15 @@
             }else{
                 $data = $this->giathanh_model->all();
             }
+            require_once('views_admin/index.php');
+        }
 
 
 
+
+        public function all_km()   // hàm hiển thị tất cả sản phẩm trong database 
+        {
+            $data_km = $this->giathanh_model->all_km();
             require_once('views_admin/index.php');
         }
 
@@ -40,6 +46,7 @@
         {
             $id = isset($_GET['id']) ? $_GET['id'] : 1;
             $data = $this->giathanh_model->find($id);
+            $data_km = $this->giathanh_model->all_km();
             require_once('views_admin/index.php');
         } 
 
@@ -84,35 +91,7 @@
 
 
 
-          function them_soluong_giaodien()
-         {
-            $data_km = $this->giathanh_model->khuyenmai();
-
-            $data_mau = $this->giathanh_model->mau();
-
-            $data_size = $this->giathanh_model->size();
-
-            $data_lsp = $this->giathanh_model->loaisp();
-
-        // chỗ này đê thêm số lượng
-            $idSP = $_GET['idSP'];
-            $soluong_sanpham = $_GET['soluong'];
-
-            require_once('views_admin/index.php');
-         }
-
-
-         public function them_soluong()
-         {
-            $soluong_them = filter_input(INPUT_POST, 'soluong_them');
-            $soluong_sanpham = filter_input(INPUT_POST, 'soluong_sanpham');
-
-            $soluong_tong = $soluong_them + $soluong_sanpham;
-
-            $idSP = filter_input(INPUT_POST, 'idSP');
-            $this->giathanh_model->them_soluong($idSP, $soluong_tong);
-         }
-
+        
 
 
 

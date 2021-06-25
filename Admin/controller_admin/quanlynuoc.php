@@ -27,6 +27,18 @@
     		require_once('views_admin/index.php');
     	}
 
+
+
+        public function list_loainuoc() 
+        {
+            $data_loainuoc = $this->nuoc_controller->All_LoaiNuoc();
+            $data_giathanh = $this->nuoc_controller->ALl_GiaThanh();
+            require_once('views_admin/index.php');
+        }
+
+
+
+
         public function details()  // hàm hiển thị chi tiết thông tin của một người dùng được chọn bởi $id
         {
             $id = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -38,6 +50,10 @@
         {
             $id = isset($_GET['id']) ? $_GET['id'] : 1;
             $data = $this->nuoc_controller->find($id);
+
+            $data_loainuoc = $this->nuoc_controller->All_LoaiNuoc();
+            $data_giathanh = $this->nuoc_controller->ALl_GiaThanh();
+            
             require_once('views_admin/index.php');
         }
 

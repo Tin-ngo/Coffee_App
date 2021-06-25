@@ -14,7 +14,14 @@
            </tr>
             <tr>
                <td>idKM:</td>
-               <td><input type="text" value="<?php echo $data['idKM'];?>" name="idKM" required></td>
+               <td>
+                    <select style="padding: 5px;" name = "idKM" required>
+                     <?php foreach($data_km as $value){ ?>
+                        <option value = "<?= $value['idKM'] ?>"><?= $value['LoaiKM'] ?>/ <?= number_format($value['GiatriKM']) ?> vnd</option>
+                     <?php } ?>
+                  </select>
+                    <input disabled type="text" value="<?php echo $data['idKM'];?>/ <?php echo $data['LoaiKM'];?>" name="idKM" required>
+                </td>
            </tr>
                      
            <!--          <input name="ok" type="submit" value="Ok" /> -->
