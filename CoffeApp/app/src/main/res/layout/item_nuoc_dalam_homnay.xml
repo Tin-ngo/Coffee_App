@@ -29,6 +29,15 @@
             android:textColor="#000000"
             android:padding="10dip"
             android:gravity="center"/>
+        <TextView
+            android:id="@+id/txt_Soban_dalam_homnay"
+            android:text="Số lượng"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="#000000"
+            android:padding="10dip"
+            android:gravity="center"/>
     </TableRow>
 
 

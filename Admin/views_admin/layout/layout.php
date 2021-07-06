@@ -2,7 +2,7 @@
   <!-- Sidebar -->
   <div id="sidebar">
     <header>
-      <a href="../?action=trangchu" title="xem trang web">
+      <a href="#" title="xem trang web">
         <div style="color:white;" href="#">Quản Trị Viên<br> </div> 
       	<div style="line-height: 1px; color:white;font-size: 10px;"><span style="color:orange;">COFFEE</span> APP</div>
       </a>
@@ -81,7 +81,7 @@
             if(isset($_SESSION['tendangnhap'])){
               echo "Xin chào ". $_SESSION['tendangnhap'];
             }else{
-              echo "Xin Chào ...";
+              echo "Xin Chào";
             }
 
             ?>

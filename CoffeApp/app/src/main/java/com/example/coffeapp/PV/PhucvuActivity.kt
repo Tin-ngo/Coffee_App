@@ -226,14 +226,10 @@ class PhucvuActivity : AppCompatActivity() {
                           myListView_phucvu_activity.adapter = CustomAdapter(applicationContext, array)
                           myListView_phucvu_activity.onItemClickListener = AdapterView.OnItemClickListener {
                               adapterView, view, position, id ->
-                              if (postlist[position].idDatnuoc.equals(0)) {// || postlist[position].thanhtoan.equals(1)
                                   //nếu bàn chưa được đặt hoặc bàn đã thanh toán thì chưa có khách
                                   var dialog = CustomDialogFragment_PV(postlist[position].idSoban)   //hiển thị dialog khi click
                                   dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-                              } else {  //khi bàn đã có khách
-                                  var dialog = DialogFragmment_detailNuoc(position,postlist[position].idSoban, array)   //hiển thị dialog khi click
-                                  dialog.show(supportFragmentManager, "customDialog") //hiển thị dialog khi click
-                              }
+
                           }
                       }
                   }

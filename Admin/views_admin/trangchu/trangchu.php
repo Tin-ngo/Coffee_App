@@ -6,7 +6,8 @@
       <h1>THỐNG KÊ</h1>
       
       <br>
-        <a class="del_chat" href="?action=delete_chat">
+       <!-- href="?action=delete_chat" -->
+        <a class="del_chat" id="del_chat" onclick="TB()" href="">
             Làm sạch dữ liệu chat 
             <i class="fa fa-trash"></i>
          </a>
@@ -94,13 +95,21 @@
           </div>
      </div>
      
-
-
-
 </div>
 
-
-
-
+<script>
+    var a = document.getElementById('del_chat');
+    function TB(){  
+        // alert("Bạn sẽ không thể khôi phục tin nhắn cũ!");
+        var r = confirm("Bạn sẽ không thể khôi phục tin nhắn cũ!");
+        if (r == true) { 
+            // window.location="?action=delete_chat";
+            a.href = "?action=delete_chat";
+        }
+        if (r == false) {
+            a.href = "#";
+        }
+    }
+</script>
 
 </div>

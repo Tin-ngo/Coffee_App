@@ -66,7 +66,7 @@ class Adapter_ListNuoc_Dalam_homnay(var context : Context, var mang_nuoc_dalam_h
         var ban: OBJ_Datnuoc = getItem(position) as OBJ_Datnuoc
         viewholder.textviewtenNuoc_Dalam_homnay.text = ban.tenNuoc
         viewholder.textviewsoluongNuoc_Dalam_homnay.text = "SL"+ban.soluong
-
+        viewholder.textviewSoban_Dalam_homnay.text = "Bàn "+ban.idSoban
 
 
         return view as View
@@ -75,11 +75,13 @@ class Adapter_ListNuoc_Dalam_homnay(var context : Context, var mang_nuoc_dalam_h
     /* Tạo class khởi tạo các giá trị ánh xạ */
     class ViewHolder(row: View) {
         var textviewtenNuoc_Dalam_homnay: TextView
+        var textviewSoban_Dalam_homnay: TextView
         var textviewsoluongNuoc_Dalam_homnay: TextView
 
         /* gán ánh xạ vào */
         init {
             textviewtenNuoc_Dalam_homnay = row.findViewById(R.id.txt_tenNuoc_dalam_homnay) as TextView
+            textviewSoban_Dalam_homnay = row.findViewById(R.id.txt_Soban_dalam_homnay) as TextView
             textviewsoluongNuoc_Dalam_homnay = row.findViewById(R.id.txt_soluong_dalam_homnay) as TextView
 
         }

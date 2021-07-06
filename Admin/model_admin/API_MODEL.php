@@ -109,12 +109,15 @@
         {
 
             // $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh WHERE datnuoc.idDatnuoc IS NULL ORDER BY soban.idSoban";
+
             $query = "SELECT soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban 
                 LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban 
                 LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc 
                 LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh 
                 WHERE datnuoc.thanhtoan = 1 || datnuoc.idDatnuoc IS NULL 
                 ORDER BY soban.idSoban";
+
+            // $query = "SELECT COUNT(soban.idSoban),soban.idSoban, datnuoc.idDatnuoc,datnuoc.thanhtoan, datnuoc.Xong_Don, datnuoc.soluong, nuoc.tenNuoc, nuoc.idGiaThanh, giathanh.GiaNiemYet FROM soban LEFT JOIN datnuoc ON soban.idSoban = datnuoc.idSoban LEFT JOIN nuoc ON datnuoc.idNuoc = nuoc.idNuoc LEFT JOIN giathanh ON nuoc.idGiaThanh = giathanh.idGiaThanh WHERE datnuoc.thanhtoan = 1 || datnuoc.idDatnuoc IS NULL GROUP BY soban.idSoban ORDER BY soban.idSoban";
 
 
             $result = $this->api->query($query);

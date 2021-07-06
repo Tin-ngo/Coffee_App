@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import com.example.coffeapp.MyAPIInterface
 import com.example.coffeapp.OBJ_Ban
 import com.example.coffeapp.OBJ_Nuoc
+import com.example.coffeapp.PV.Order.CustomDialogFragment_PV
 import com.example.coffeapp.R
+import kotlinx.android.synthetic.main.fragment_custom_dialog_pv.*
 
 import kotlinx.android.synthetic.main.fragment_custom_dialog_pv.view.*
+import kotlinx.android.synthetic.main.phucvu_activity.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,17 +60,13 @@ class DialogFragment_OrderXong(var number:Int) : DialogFragment() {
         getNuoc_OrderXong(rootView, number)
 
 
-        // đang làm chỗ này
-//        rootView.listview_dialog.onItemClickListener = AdapterView.OnItemClickListener {
-//            adapterView, view, position,
-//            id ->
-//            Log.d("Test", "thử nghiệm này đặt trong getBan()")
-//
-//            var view_item_nuoc : View = inflater.inflate(R.layout.item_nuoc, container, false)
-//
-//            Log.d("Test_lấy id nước và SL", view_item_nuoc.txt_idNuoc_hidden.text as String)
-//
-//        }
+       rootView.order_more.setOnClickListener {
+           Log.d("test", "gọi thêm")
+           //đang
+           var dialog = CustomDialogFragment_PV(number)   //hiển thị dialog khi click
+           fragmentManager?.let { it1 -> dialog.show(it1, "customDialog") } //hiển thị dialog khi click
+           order_more.setTransitionVisibility(View.VISIBLE)  // hiện view headerlabel
+       }
 
 
 

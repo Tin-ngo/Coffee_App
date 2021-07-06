@@ -66,6 +66,7 @@ class Adapter_ListNuoc_Canlam(var context : Context, var mang_nuoc_canlam : Arra
         var ban: OBJ_Datnuoc = getItem(position) as OBJ_Datnuoc
         viewholder.textviewtenNuoc_Canlam.text = ban.tenNuoc
         viewholder.textviewsoluongNuoc_Canlam.text = "SL"+ban.soluong
+        viewholder.textviewSoban.text = "Bàn "+ban.idSoban
         viewholder.textviewXacnhanXong.text = "Xác Nhận đã làm Xong?"
 
         viewholder.textviewXacnhanXong.setOnClickListener {
@@ -82,13 +83,16 @@ class Adapter_ListNuoc_Canlam(var context : Context, var mang_nuoc_canlam : Arra
     class ViewHolder(row: View) {
         var textviewtenNuoc_Canlam: TextView
         var textviewsoluongNuoc_Canlam: TextView
+        var textviewSoban: TextView
         var textviewXacnhanXong: TextView
 
         /* gán ánh xạ vào */
         init {
             textviewtenNuoc_Canlam = row.findViewById(R.id.txt_tenNuoc_canlam) as TextView
             textviewsoluongNuoc_Canlam = row.findViewById(R.id.txt_soluong_canlam) as TextView
+            textviewSoban = row.findViewById(R.id.txt_soban) as TextView
             textviewXacnhanXong = row.findViewById(R.id.txt_Xacnhan_lamxong) as TextView
+
         }
     }
 

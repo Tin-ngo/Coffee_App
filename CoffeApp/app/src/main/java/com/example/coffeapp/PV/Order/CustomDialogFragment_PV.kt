@@ -41,7 +41,7 @@ class CustomDialogFragment_PV(var number:Int) : DialogFragment() {
         rootView.txt_chonnuoc.setText("Bàn ${so}")  // lấy số bàn
 
 
-
+        rootView.order_more.setTransitionVisibility(View.INVISIBLE)
 
         //xử lý khi bấm nút submit
         rootView.submitButton.setOnClickListener {
